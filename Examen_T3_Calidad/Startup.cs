@@ -1,7 +1,10 @@
 using Examen_T3_Calidad.DB;
+using Examen_T3_Calidad.Repository;
+using Examen_T3_Calidad.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,11 +36,12 @@ namespace Examen_T3_Calidad
            );
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(o => o.LoginPath = "/Login/Login");
+                .AddCookie(o => o.LoginPath = "/Auth/Login");
 
-            //services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IAuthService, AuthService>();
             //services.AddTransient<IHomeRepository, HomeRepository>();
-            //services.AddTransient<IAuthRepository, AuthRepository>();
+            services.AddTransient<IAuthRepository, AuthRepository>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +61,7 @@ namespace Examen_T3_Calidad
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
