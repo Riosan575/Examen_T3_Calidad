@@ -1,21 +1,24 @@
-﻿using Examen_T3_Calidad.DB;
-using Examen_T3_Calidad.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Examen_T3_Calidad.DB;
+using Examen_T3_Calidad.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace Examen_T3_Calidad.Controllers
+namespace EXAMENFINALN00038802.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class NotaController : Controller
     {
         private readonly NotaContext context;
-        public HomeController(NotaContext context)
+        public NotaController(NotaContext context)
         {
             this.context = context;
         }
+        [Authorize]
         [HttpGet]
         public IActionResult Index()
         {
@@ -90,7 +93,7 @@ namespace Examen_T3_Calidad.Controllers
 
 
         [HttpPost]
-        public IActionResult Edit(Nota nota/*, List<int> etiqueta*/)
+        public IActionResult Edit(Nota nota)
         {
             nota.Fecha = DateTime.Now;
 
@@ -132,5 +135,6 @@ namespace Examen_T3_Calidad.Controllers
             var nota = context.Notas.Where(o => o.Id == id).FirstOrDefault();
             return View(nota);
         }
+
     }
 }

@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+    var nota = (List<Nota>)Model;
+}
+
+@foreach (var item in nota)
+{
+    <div class="container-fluid">
+        <ul class="list-group" style="list-style-type:circle">
+            <li class="list-group-item">
+                <a class="text-info" href="/Nota/Det?Id=@item.Id"><strong>@item.Titulo</strong></a>
+                <br />
+                <span>
+                    <strong>Cuerpo: </strong>
+                    @if (item.Contenido.Length > 50)
+                    {
+                        <parcial>@item.Contenido.Substring(0, 50) ...</parcial> }
+                    else
+                    {
+                        <parcial>@item.Contenido</parcial>}
+                </span>
+
+                <br />
+                <div align="right">
+                    <a href="/Nota/Eliminar?id=@item.Id" style="margin:0px 5px;" class="btn btn-danger float-lg-right">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </a>
+                    <button id="editModal" style="margin:0px 5px;" class="btn btn-warning float-lg-right" href="#" data-toggle="modal" data-target="#edit" onclick="selCuenta('@item.Id','@item.Titulo','@item.Contenido')">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pen" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                        </svg>
+                    </button>
+                </div>
+            </li>
+        </ul>
+        <br />
+    </div>
+}
+
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="editNotita">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function confirmDel(e) {
+        var agree = confirm("¿Realmente desea eliminarlo? ");
+
+        if (agree == false)
+            e.preventDefault();
+    }
+</script>
+
+<script>
+    function selCuenta(id, titulo, contenido) {
+        console.log(id + titulo + contenido);
+        $('#mtxtId').val(id);
+        $('#mtxtTitulo').val(titulo);
+        $('#mtxtContenido').val(contenido);
+    };
+
+    $.ajax({
+        url: '/Nota/Edit',
+        type: 'get'
+    }).done(function (html) {
+        $('#editNotita').html(html);
+    })
+
+    function submitForm() {
+        $('#editNota').submit();
+    }
+
+    function editar(event) {
+        event.preventDefault();
+        var dataString = new FormData($('#edit form')[0]);
+        $.ajax({
+            url: "/Nota/Edit",
+            type: "post",
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            data: dataString
+        }).done(function (html) {
+            location.reload();
+        }).fail(function (html) {
+            $('#editNotita').html(html.responseText);
+        });
+    }
+</script>
+

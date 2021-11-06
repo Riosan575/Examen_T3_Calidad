@@ -33,7 +33,11 @@ namespace Examen_T3_Calidad
            );
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(o => o.LoginPath = "/login/login");
+                .AddCookie(o => o.LoginPath = "/Login/Login");
+
+            //services.AddTransient<IAuthService, AuthService>();
+            //services.AddTransient<IHomeRepository, HomeRepository>();
+            //services.AddTransient<IAuthRepository, AuthRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -36,8 +36,7 @@ namespace Examen_T3_Calidad.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            var user = context.Usuarios
-                .FirstOrDefault(o => o.Username == username && o.Password == CreateHash(password));
+            var user = context.Usuarios.Where(o => o.Username == username && o.Password == password).FirstOrDefault();
 
             if (user == null)
             {
@@ -56,7 +55,7 @@ namespace Examen_T3_Calidad.Controllers
             HttpContext.SignInAsync(claimsPrincipal);
 
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Nota");
         }
         [HttpPost]
         public ActionResult Register(Usuario account) // POST
@@ -70,7 +69,6 @@ namespace Examen_T3_Calidad.Controllers
 
             if (ModelState.IsValid)
             {
-                account.Password = CreateHash(account.Password);
                 context.Usuarios.Add(account);
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,16 +80,7 @@ namespace Examen_T3_Calidad.Controllers
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync();
-            return RedirectToAction("Login");
-        }
-
-        private string CreateHash(string input)
-        {
-            var sha = SHA512.Create();
-            input += configuration.GetValue<string>("Key");
-            var hash = sha.ComputeHash(Encoding.Default.GetBytes(input));
-
-            return Convert.ToBase64String(hash);
+            return RedirectToAction("Index");
         }
 
     }

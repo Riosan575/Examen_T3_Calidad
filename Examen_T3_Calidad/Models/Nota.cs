@@ -14,6 +14,6 @@ namespace Examen_T3_Calidad.Models
         public string Titulo { get; set; }
         public DateTime Fecha { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        public string Contendio { get; set; }
+        public string Contenido { get; set; }
     }
 }
