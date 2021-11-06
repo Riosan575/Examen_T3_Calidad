@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Examen_T3_Calidad.DB;
 using Examen_T3_Calidad.Models;
+using Examen_T3_Calidad.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,12 @@ namespace EXAMENFINALN00038802.Controllers
     [Authorize]
     public class NotaController : Controller
     {
+        private readonly INotaRepository notaRepository;
         private readonly NotaContext context;
-        public NotaController(NotaContext context)
+        public NotaController(NotaContext context, INotaRepository notaRepository)
         {
             this.context = context;
+            this.notaRepository = notaRepository;
         }
         [Authorize]
         [HttpGet]
@@ -51,8 +54,7 @@ namespace EXAMENFINALN00038802.Controllers
 
         [HttpPost]
         public IActionResult Create(Nota nota, List<int> etiqueta)
-        {
-            List<NotaEtiqueta> etic = new List<NotaEtiqueta>();
+        {           
 
             if (etiqueta.Count() == 0)
                 ModelState.AddModelError("etiqueta", "Seleccione uno por lo menos");
@@ -60,17 +62,7 @@ namespace EXAMENFINALN00038802.Controllers
             nota.Fecha = DateTime.Now;
             if (ModelState.IsValid)
             {
-                context.Notas.Add(nota);
-                context.SaveChanges();
-                foreach (var item in etiqueta)
-                {
-                    var etique = new NotaEtiqueta();
-                    etique.EtiquetaId = item;
-                    etique.NotaId = nota.Id;
-                    etic.Add(etique);
-                }
-                context.NotaEtiquetas.AddRange(etic);
-                context.SaveChanges();
+                notaRepository.Create(nota,etiqueta);
                 return RedirectToAction("Index");
             }
             else
@@ -95,12 +87,11 @@ namespace EXAMENFINALN00038802.Controllers
         [HttpPost]
         public IActionResult Edit(Nota nota)
         {
-            nota.Fecha = DateTime.Now;
+            
 
-            if (ModelState.IsValid)
+            if (nota != null)
             {
-                context.Notas.Update(nota);
-                context.SaveChanges();
+                notaRepository.Edit(nota);
                 return RedirectToAction("Index");
             }
             else
@@ -117,11 +108,7 @@ namespace EXAMENFINALN00038802.Controllers
         [HttpGet]
         public IActionResult Eliminar(int id)
         {
-            var nota = context.Notas.Where(o => o.Id == id).FirstOrDefault();
-            var etiqueta = context.NotaEtiquetas.Where(o => o.NotaId == id).ToList();
-            context.Notas.Remove(nota);
-            context.NotaEtiquetas.RemoveRange(etiqueta);
-            context.SaveChanges();
+            notaRepository.Eliminar(id);
             return RedirectToAction("Index");
         }
 

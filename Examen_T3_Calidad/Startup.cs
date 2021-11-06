@@ -39,7 +39,7 @@ namespace Examen_T3_Calidad
                 .AddCookie(o => o.LoginPath = "/Auth/Login");
 
             services.AddTransient<IAuthService, AuthService>();
-            //services.AddTransient<IHomeRepository, HomeRepository>();
+            services.AddTransient<INotaRepository, NotaRepository>();
             services.AddTransient<IAuthRepository, AuthRepository>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         }

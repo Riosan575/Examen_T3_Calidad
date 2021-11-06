@@ -1,0 +1,155 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\ExamenT3Test\\ExamenT3Test.csproj": {}
+  },
+  "projects": {
+    "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\ExamenT3Test\\ExamenT3Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\ExamenT3Test\\ExamenT3Test.csproj",
+        "projectName": "ExamenT3Test",
+        "projectPath": "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\ExamenT3Test\\ExamenT3Test.csproj",
+        "packagesPath": "C:\\Users\\FRC\\.nuget\\packages\\",
+        "outputPath": "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\ExamenT3Test\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\FRC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\Examen_T3_Calidad\\Examen_T3_Calidad.csproj": {
+                "projectPath": "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\Examen_T3_Calidad\\Examen_T3_Calidad.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.9.4, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.16.1, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.17.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\Examen_T3_Calidad\\Examen_T3_Calidad.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\Examen_T3_Calidad\\Examen_T3_Calidad.csproj",
+        "projectName": "Examen_T3_Calidad",
+        "projectPath": "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\Examen_T3_Calidad\\Examen_T3_Calidad.csproj",
+        "packagesPath": "C:\\Users\\FRC\\.nuget\\packages\\",
+        "outputPath": "D:\\2021-2 UPN\\CALIDAD\\Semana 12\\Examen_T3_Calidad\\Examen_T3_Calidad\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\FRC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -56,17 +56,10 @@ namespace Examen_T3_Calidad.Controllers
         [HttpPost]
         public ActionResult Register(Usuario account) // POST
         {
-            var accounts = context.Usuarios.ToList();
-            foreach (var item in accounts)
+            if (account != null)
             {
-                if (item.Username == account.Username)
-                    ModelState.AddModelError("Usuario", "El Usuario ya existe, ingrese otro Usuario");
-            }
+                authRepository.Register(account);
 
-            if (ModelState.IsValid)
-            {
-                context.Usuarios.Add(account);
-                context.SaveChanges();
                 return RedirectToAction("Login");
             }
             return View("Register", account);
@@ -75,7 +68,7 @@ namespace Examen_T3_Calidad.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            HttpContext.SignOutAsync();
+            authService.Logout();
             return RedirectToAction("Login");
         }
 
