@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Examen_T3_Calidad.DB;
+﻿using Examen_T3_Calidad.DB;
 using Examen_T3_Calidad.Models;
 using Examen_T3_Calidad.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace EXAMENFINALN00038802.Controllers
+namespace Examen_T3_Calidad.Controllers
 {
     [Authorize]
     public class NotaController : Controller
@@ -54,23 +54,20 @@ namespace EXAMENFINALN00038802.Controllers
 
         [HttpPost]
         public IActionResult Create(Nota nota, List<int> etiqueta)
-        {           
+        {
 
             if (etiqueta.Count() == 0)
                 ModelState.AddModelError("etiqueta", "Seleccione uno por lo menos");
 
             nota.Fecha = DateTime.Now;
-            if (ModelState.IsValid)
+            if (nota != null && etiqueta != null)
             {
-                notaRepository.Create(nota,etiqueta);
+                notaRepository.Create(nota, etiqueta);
                 return RedirectToAction("Index");
             }
-            else
-            {
-                Response.StatusCode = 400;
-                ViewBag.Etiquetas = context.Etiquetas.ToList();
-                return View(nota);
-            }
+            Response.StatusCode = 400;
+            ViewBag.Etiquetas = context.Etiquetas.ToList();
+            return View(nota);
         }
 
 
@@ -87,19 +84,14 @@ namespace EXAMENFINALN00038802.Controllers
         [HttpPost]
         public IActionResult Edit(Nota nota)
         {
-            
-
             if (nota != null)
             {
                 notaRepository.Edit(nota);
                 return RedirectToAction("Index");
             }
-            else
-            {
-                Response.StatusCode = 400;
-                ViewBag.Etiquetas = context.Etiquetas.ToList();
-                return View(nota);
-            }
+            Response.StatusCode = 400;
+            ViewBag.Etiquetas = context.Etiquetas.ToList();
+            return View(nota);
 
         }
 
@@ -108,8 +100,12 @@ namespace EXAMENFINALN00038802.Controllers
         [HttpGet]
         public IActionResult Eliminar(int id)
         {
-            notaRepository.Eliminar(id);
-            return RedirectToAction("Index");
+            if (id != 0)
+            {
+                notaRepository.Eliminar(id);
+                return RedirectToAction("Index","Nota");
+            }            
+            return View("Index");
         }
 
 
