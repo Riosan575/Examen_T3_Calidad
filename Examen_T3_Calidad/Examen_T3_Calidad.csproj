@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DB\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>

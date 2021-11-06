@@ -1,4 +1,5 @@
-﻿using Examen_T3_Calidad.Models;
+﻿using Examen_T3_Calidad.DB;
+using Examen_T3_Calidad.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +12,16 @@ namespace Examen_T3_Calidad.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private NotaContext context;
+        public HomeController(NotaContext context)
         {
-            _logger = logger;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            
+            return View("Index");
         }
 
         public IActionResult Privacy()
